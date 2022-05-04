@@ -1,0 +1,33 @@
+#page-wrapper {
+  background-color: #fafafd;
+  /* opacity: 0.2; */
+  background: radial-gradient(
+      circle,
+      transparent 20%,
+      #fafafd 20%,
+      #fafafd 80%,
+      transparent 80%,
+      transparent
+    ),
+    radial-gradient(
+        circle,
+        transparent 20%,
+        #fafafd 20%,
+        #fafafd 80%,
+        transparent 80%,
+        transparent
+      )
+      35px 35px,
+    linear-gradient(
+        #dadbfd 2.8000000000000003px,
+        transparent 2.8000000000000003px
+      )
+      0 -1.4000000000000001px,
+    linear-gradient(
+        90deg,
+        #dadbfd 2.8000000000000003px,
+        #fafafd 2.8000000000000003px
+      ) -1.4000000000000001px 0;
+  background-size: 70px 70px, 70px 70px, 35px 35px, 35px 35px;
+  min-height: 100vh;
+}
