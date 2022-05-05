@@ -1,0 +1,14 @@
+Set $zodiac to be equal to the following values for each case:
+
+case 0: 'Rat'
+case 1: 'Ox'
+case 2: 'Tiger'
+case 3: 'Rabbit'
+case 4: 'Dragon'
+case 5: 'Snake'
+case 6: 'Horse'
+case 7: 'Goat'
+case 8: 'Monkey'
+case 9: 'Rooster'
+case 10: 'Dog'
+case 11: 'Pig'
