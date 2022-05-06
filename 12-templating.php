@@ -5,7 +5,9 @@
    Use the __DIR__ constant to explicitly navigate relative to this file.
  -->
 <!-- Testing github repo -->
-<?php include_once (__DIR__."/12-templating1-header.php")?>
+<?php require_once(__DIR__."/12-templating-header.php")?>
+
 <h1>Hello World</h1>
+
 <p>Page content would be here...</p>
-<?php require_once (__DIR__."/12-templating-footer.php")?>
+<?php include_once(__DIR__."/12-templating-footer.php")?>
