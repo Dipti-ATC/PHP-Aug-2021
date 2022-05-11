@@ -8,7 +8,13 @@
     4. Use a loop to output each customer in the table below
 
  -->
+<?php 
+require_once(__DIR__."/inc/database.php");
+$sql= "SELECT * FROM customers";
+ $result= mysqli_query($db, $sql);
+ $rows= mysqli_fetch_all($result, MYSQLI_ASSOC);
 
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,12 +41,15 @@
         </tr>
       </thead>
       <tbody>
+        
+        <?php  foreach($rows as $customer){?>
         <tr>
-          <th scope="row">1</th>
-          <td>Name</td>
-          <td>Name</td>
-          <td>Email</td>
+          <th scope="row"><?php echo $customer['id']; ?></th>
+          <td><?php echo $customer['f_name']; ?></td>
+          <td><?php echo $customer['l_name']; ?></td>
+          <td><?php echo $customer['email']; ?></td>
         </tr>
+        <?php }?>
       </tbody>
     </table>
 
