@@ -7,8 +7,45 @@
         Ensure that the task cannot be given an empty name and redirect
         the user to "index.php" if the update is successful.
  -->
+ 
+<?php 
+require_once(__DIR__ . "/inc/header.php");
+require_once(__DIR__ . "/inc/database.php");
+$errors=[];
+$taskName="";
+if ($_SERVER['REQUEST_METHOD']=="GET" && !empty($_GET['id'])){
+  $sql ="SELECT * FROM `tasks` WHERE id = :id";
+  $stmt= $pdo->prepare($sql);//prepare statment 
+  $stmt->bindParam(":id", $param_id );//bind parameter
+  $param_id= trim($_GET['id']);// assigning value
 
-<?php require_once(__DIR__ . "/inc/header.php") ?>
+  if($stmt->execute() && $stmt->rowCount()== 1){
+    $row=$stmt->fetch(PDO::FETCH_ASSOC);
+    $taskName = $row['name'];
+  }else{
+    array_push($errors, "Task not found");
+  }
+}
+if($_SERVER['REQUEST_METHOD']=="POST"){
+  $updatedTask = trim($_POST['new_name']);
+  if(strlen($updatedTask)<5){
+    array_push($errors, "Enter more than five characters");
+  }else{
+    $sql = "UPDATE `tasks` SET name = :name WHERE id =:id";
+    
+  // UPDATE `tasks`SET name = "update" WHERE id=6;
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(":id", $param_id);
+    $stmt->bindParam(":name", $param_name);
+    $param_id = trim($_POST['id']);
+    $param_name= $updatedTask;
+    $stmt->execute();
+    header("location: index.php");
+
+}
+}
+
+?>
 
 <div id="page-wrapper">
   <div class="container py-5">
@@ -20,8 +57,8 @@
 
           <div class="col order-md-2">
             <div class="input-group mb-3">
-              <input type="text" name="new_name" class="form-control" value="Old Task Value">
-              <input type="hidden" name="id" value="">
+              <input type="text" name="new_name" class="form-control" value="<?php echo $taskName; ?>">
+              <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
               <button type="submit" class="btn btn-primary" type="button">Update</button>
             </div>
           </div>

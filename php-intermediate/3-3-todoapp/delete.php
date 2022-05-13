@@ -16,18 +16,50 @@
 
  -->
 
-<?php require_once(__DIR__ . "/inc/header.php") ?>
+<?php 
+  require_once(__DIR__ . "/inc/header.php");
+  require_once(__DIR__ . "/inc/database.php");
+  $errors=[];
+  $taskName="";
+  if ($_SERVER['REQUEST_METHOD']=="GET" && !empty($_GET['id'])){
+    $sql ="SELECT * FROM `tasks` WHERE id = :id";
+    $stmt= $pdo->prepare($sql);//prepare statment 
+    $stmt->bindParam(":id", $param_id );//bind parameter
+    $param_id= trim($_GET['id']);// assigning value
+
+    if($stmt->execute() && $stmt->rowCount()== 1){
+      $row=$stmt->fetch(PDO::FETCH_ASSOC);
+      $taskName = $row['name'];
+    }else{
+      array_push($errors, "Task not found");
+    }
+  }
+  if ($_SERVER['REQUEST_METHOD']== "POST"){
+    $sql ="DELETE FROM `tasks` WHERE id= :id";
+    $stmt= $pdo->prepare($sql);
+    $stmt->bindParam(":id", $param_id);
+    $param_id = trim($_POST['id']);
+    $stmt->execute();
+    header("location: index.php");
+
+  }
+
+?>
 
 <div id="page-wrapper">
   <div class="container py-5">
     <div id="content" class="border rounded bg-white shadow-sm px-3 pt-2 pb-4 text-center">
       <h1 class="display-4 mb-4 text-center">Delete?</h1>
       <p>Are you sure you want to delete task:
-        <!-- Echo the task here -->
+        <?php echo $taskName;
+          foreach($errors as $error){
+            echo "<p class='alert-danger'>" . $error ."</p>";
+          }
+        ?>
       </p>
       <a href="index.php" class="btn btn-success">&lt; Go Back</a>
       <form method="POST" class="d-inline-block">
-        <input type="hidden" name="id" value="">
+        <input type="hidden" name="id" value="<?php echo trim($_GET['id'])?>">
         <button type="submit" class="btn btn-danger" name="delete" value="true">🗑 Delete</button>
       </form>
     </div>

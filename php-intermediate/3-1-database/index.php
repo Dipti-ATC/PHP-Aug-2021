@@ -10,7 +10,9 @@
  -->
 <?php 
 require_once(__DIR__."/inc/database.php");
+// sql statement
 $sql= "SELECT * FROM customers";
+//rsult store the data coming from th query
  $result= mysqli_query($db, $sql);
  $rows= mysqli_fetch_all($result, MYSQLI_ASSOC);
 
