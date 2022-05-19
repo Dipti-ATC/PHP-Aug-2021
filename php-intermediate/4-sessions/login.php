@@ -12,7 +12,45 @@ Once the user has been "logged in", redirect them to index.php.
 
  -->
 
-<?php require_once(__DIR__ . "/inc/header.php") ?>
+<?php 
+require_once(__DIR__ . "/inc/database.php"); 
+require_once(__DIR__ . "/inc/header.php"); 
+session_start();
+$errors =[];
+if($_SERVER['REQUEST_METHOD']== "POST"){
+  //check fields are empty
+  
+  if(empty($_POST['email'])){
+    array_push($errors, "Please enter your email");
+  }else{
+    $email = strtolower(trim($_POST['email']));
+  }
+  if(empty($_POST['password'])){
+    array_push($errors, "Please enter your password");
+  }else{
+    $password = trim($_POST['password']);
+  }
+  //if there is no error
+  if(count($errors)==0){
+    $sql= "SELECT * FROM users WHERE email =:email";
+    $stmt= $pdo->prepare($sql);
+    $stmt->bindParam(":email", $email);
+    $stmt->execute();
+    if($stmt->rowCount()==1){
+      $result= $stmt->fetch(PDO::FETCH_ASSOC); //$stmt->fetch(PDO::FETCH_ASSOC)
+      if($password == $result['password'] ){
+        $_SESSION['name'] = $result ['full_name'];
+        header("location:index.php");
+      } // if anytime you get confused echo the variable to check the values
+      else{
+        array_push($errors, "invalid credentials");
+      }      
+    }else{
+      array_push($errors, "invalid credentials");
+    }
+  }
+}
+?>
 
 <div class="container pt-5 h-100 align-items-center d-flex">
   <div class="row justify-content-center w-100">
@@ -25,6 +63,9 @@ Once the user has been "logged in", redirect them to index.php.
             <hr>
             <form method="POST">
               <div class="mb-3">
+                <?php  foreach($errors as $error){
+      echo "<p class='text-danger'> {$error} </p>";
+    }?>
                 <label for="email" class="form-label">Email address</label>
                 <input type="email" class="form-control" name="email" id="email">
               </div>
