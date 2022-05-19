@@ -39,7 +39,9 @@ if($_SERVER['REQUEST_METHOD']== "POST"){
     if($stmt->rowCount()==1){
       $result= $stmt->fetch(PDO::FETCH_ASSOC); //$stmt->fetch(PDO::FETCH_ASSOC)
       if($password == $result['password'] ){
-        $_SESSION['name'] = $result ['full_name'];
+        $_SESSION['id'] = $result['id'];
+        
+        $_SESSION['name'] = $result['full_name'];
         header("location:index.php");
       } // if anytime you get confused echo the variable to check the values
       else{

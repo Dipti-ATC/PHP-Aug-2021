@@ -14,3 +14,6 @@ try {
 
   die("ERROR: Could not connect. " . $e->getMessage());
 }
+
+
+?>
