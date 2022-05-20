@@ -1,0 +1,115 @@
+/*--------------------------------------------
+boilerplate styles
+--------------------------------------------*/
+*{
+	box-sizing: border-box;
+	margin:0;
+	padding:0;
+	font-family: 'Open Sans', Verdana, sans-serif;
+}
+img, textarea {
+	max-width:100%;
+}
+a {
+	text-decoration: none;
+}
+ul li{
+	list-style-type: none;
+}
+/***** clearfix *****/
+.clearfix::after{
+	content: "";
+	display: table;
+	clear: both;
+}
+/*--------------------------------------------
+end boilerplate styles
+--------------------------------------------*/
+main, div{
+	display: flex;
+	flex-direction: column;
+}
+div{
+	padding: 40px;
+	box-shadow: 0 0 10px green;
+}
+h1{
+	font-size: 100px;
+}
+h5{
+	margin: 10px 0;
+}
+main a{
+	background: darkgreen;
+	color: white;
+	padding: 5px;
+	margin-top: auto;
+}
+
+h1, footer{
+	text-align: center;
+}
+h1, footer, form{
+	margin: 70px 1%;
+}
+form{
+	display: flex;
+}
+form *{
+	padding: 10px;
+}
+input{
+	flex: 3;
+	font-size: small;
+	border: 1px solid green;
+}
+button{
+	flex: 1;
+	background: darkgreen;
+	color: white;
+	border: none;
+}
+
+
+.gallery {
+  /* Prevent vertical gaps */
+  line-height: 0;
+   
+  -webkit-column-count: 5;
+  -webkit-column-gap:   0px;
+  -moz-column-count:    5;
+  -moz-column-gap:      0px;
+  column-count:         5;
+  column-gap:           0px;  
+}
+
+.gallery a {
+  /* Just in case there are inline attributes */
+  width: 100% !important;
+  height: auto !important;
+}
+
+@media (max-width: 1200px) {
+  .gallery {
+  -moz-column-count:    4;
+  -webkit-column-count: 4;
+  column-count:         4;
+  }
+}
+@media (max-width: 1000px) {
+  .gallery {
+  -moz-column-count:    3;
+  -webkit-column-count: 3;
+  column-count:         3;
+  }
+}
+@media (max-width: 800px) {
+	form{
+		flex-direction: column;
+	}
+  .gallery {
+  -moz-column-count:    2;
+  -webkit-column-count: 2;
+  column-count:         2;
+  }
+}

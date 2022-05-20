@@ -74,7 +74,10 @@ $errors =[
       $stmt= $pdo->prepare($sql);// prepare statement
       $stmt->bindParam(":name", $name);
       $stmt->bindParam(":email", $email);
-      $stmt->bindParam(":password", $password);
+      //this is part 2 hashing password, intially we stored password as a plain text
+      //$stmt->bindParam(":password", $password);
+      $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+      $stmt->bindParam(":password", $hashed_password);
       if($stmt->execute()){
         header("location: register-success.php");
       }else{

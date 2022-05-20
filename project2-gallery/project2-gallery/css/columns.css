@@ -1,0 +1,91 @@
+
+.row{
+	/*padding-left: 10px;
+	padding-right: 10px;*/
+	margin-right: auto;
+	margin-left:auto;
+}
+
+/*img {
+	width: 100%;
+}*/
+
+/* Media Queries
+================================ */
+
+@media (min-width: 1px) and (max-width: 768px)  {
+	.row > [class^="column-"]{
+		padding-top: 5px;
+		padding-bottom:5px;
+	}
+}
+
+@media (min-width: 769px) {
+
+	/* Columns
+	================================ */
+	.row > [class^="column-"]{
+		float:left;
+		margin-left: 2%;
+		min-height:1px;
+		padding-left: 10px;
+		padding:10px;
+	}
+	.row > [class^="column-"]:first-child{
+		margin-left: 0;
+	}
+	.row > [class^="column-"]:last-child{
+		float:right;
+	}
+
+
+	/* Columns are 65px wide, with 20px space
+	=========================================== */
+	.column-1{
+		width:6.5%;
+	}
+	.column-2{
+		width:15%;
+	}
+	.column-3{
+		width:23.5%;
+	}
+	.column-4{
+		width:32%;
+	}
+	.column-5{
+		width:40.5%;
+	}
+	.column-6{
+		width:49%;
+	}
+	.column-7{
+		width:57.5%;
+	}
+	.column-8{
+		width:66%;
+	}
+	.column-9{
+		width:74.5%;
+	}
+	.column-10{
+		width:83%;
+	}
+	.column-11{
+		width:91.5%;
+	}
+	.column-12{
+		width:100%;
+	}
+
+	
+
+	/* Clearfix
+	================================ */
+	.row::after{
+		content:"";
+		clear:both;
+		display:table;
+	}
+
+}

@@ -37,8 +37,11 @@ if($_SERVER['REQUEST_METHOD']== "POST"){
     $stmt->bindParam(":email", $email);
     $stmt->execute();
     if($stmt->rowCount()==1){
-      $result= $stmt->fetch(PDO::FETCH_ASSOC); //$stmt->fetch(PDO::FETCH_ASSOC)
-      if($password == $result['password'] ){
+      $result= $stmt->fetch(PDO::FETCH_ASSOC); 
+      //part 1 was plain text password matching using $password == $result['password']
+      //when you hashed the password we have to use password_verify function
+     
+      if(password_verify($password, $result['password']) ){
         $_SESSION['id'] = $result['id'];
         
         $_SESSION['name'] = $result['full_name'];
