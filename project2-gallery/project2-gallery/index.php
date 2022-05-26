@@ -19,13 +19,13 @@ require_once(__DIR__ . "/inc/config.php");
 <body>
     <h1>Gallery</h1>
 
-    <form method="post" action="add_image.php">
+    <form method="post" action="add_image.php" enctype="multipart/form-data">
         <input type="file" name="image" placeholder="Add an image">
         <input type="text" name="title" placeholder="Caption your image">
-        <button type="submit">ADD IMAGE</button>
+        <button name="add_image" type="submit">ADD IMAGE</button>
     </form>
     <section class="gallery">
-		<?php 
+        <?php 
 		 	foreach($results as $result){
 				 echo "<a href='image.php?id=".$result['id']."'><img src='".$result['path']. "'></a>";
 			 }
