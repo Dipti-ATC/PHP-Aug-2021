@@ -1,7 +1,9 @@
+
 <?php
+$emailError="";
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-    $emailError="";
+    
     if(!empty($_POST['uEmail'])){
     $uName = htmlspecialchars($_POST['uName']);
     $uEmail = htmlspecialchars($_POST['uEmail']);
@@ -10,13 +12,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     // echo trim($uName);  //trim removed spaces from the begining and ending
   echo $uName;
     echo $uEmail;
-    if(preg_match('/^[a-zA-Z0-9]+$/',$uPassword)){ echo $uPassword;}
+    //password check for min- 8 Char, must have at least one number, uppercase and a lowercase character
+    if(preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/',$uPassword)){ echo $uPassword;}
     else{echo "password is not in the required format";}
 // you may use Filter_var() function with FILTER_VALIDATE_EMAIL to validate emails
     }else{
         $emailError = "enter email";}
           
     
+}
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +43,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         <input type="submit" name="submit">
     </form>
 
-    <?php }?>
+   
 </body>
 
 </html>
